@@ -1,6 +1,8 @@
 package com.Shop.GestBoutik.models;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;

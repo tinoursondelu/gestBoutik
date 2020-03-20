@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Entity class for handle Store type
+ * Entity class for handle Shelve type
  * @author Guiot Olivier
  * @version 202003
  *
@@ -29,9 +29,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @Valid
 @Entity
-@Table(name = "stores")
-public class Store extends Auditable {
-
+@Table(name = "shelves")
+public class Shelve extends Auditable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -42,13 +42,12 @@ public class Store extends Auditable {
 	@Column(nullable = false, unique = true)
 	private String designation;
 
-	@OneToMany(mappedBy = "store")
-	private Collection<Shelve> shelves;
-
-	@ManyToMany(mappedBy = "stores")
+	@ManyToOne
+	private Store store;
+	
+	@ManyToMany
 	private Collection<ItemStore> itemsStore;
 
-	@ManyToMany(mappedBy = "stores")
-	private Collection<User> users;
+
 
 }

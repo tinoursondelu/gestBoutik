@@ -8,18 +8,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.Shop.GestBoutik.helper.enumeration.BrandEnum;
+import com.Shop.GestBoutik.helper.enumeration.ColorEnum;
+import com.Shop.GestBoutik.helper.enumeration.SizeEnum;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Entity class for handle Store type
+ * Entity class for handle Shelve type
  * @author Guiot Olivier
  * @version 202003
  *
@@ -29,8 +33,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @Valid
 @Entity
-@Table(name = "stores")
-public class Store extends Auditable {
+@Table(name = "items_store")
+public class ItemStore {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,14 +45,23 @@ public class Store extends Auditable {
 	@Length(min = 3, max = 30)
 	@Column(nullable = false, unique = true)
 	private String designation;
+	
+	private ColorEnum color;
+	
+	private SizeEnum size;
+	
+	private BrandEnum brand;
 
-	@OneToMany(mappedBy = "store")
+	@ManyToMany
+	private Collection<Store> stores;
+	
+	@ManyToMany(mappedBy = "itemsStore")
 	private Collection<Shelve> shelves;
+	
+	@ManyToOne
+	private Item item;
+	
+	
 
-	@ManyToMany(mappedBy = "stores")
-	private Collection<ItemStore> itemsStore;
-
-	@ManyToMany(mappedBy = "stores")
-	private Collection<User> users;
 
 }
