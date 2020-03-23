@@ -10,8 +10,8 @@ import com.Shop.GestBoutik.models.Brand;
  */
 public enum BrandEnum {
 	
-	Nike (1L, ""),
-	Pumas (2L, "");
+	Nike (1L, "Nike"),
+	Pumas (2L, "Pumas");
 	
 	private Long id = 0L;
 	private String label;

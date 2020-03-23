@@ -1,4 +1,4 @@
-package com.Shop.GestBoutik.helper.controller;
+package com.Shop.GestBoutik.controller;
 
 import java.util.Optional;
 
