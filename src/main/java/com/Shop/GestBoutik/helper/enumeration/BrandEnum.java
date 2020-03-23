@@ -51,7 +51,7 @@ public enum BrandEnum {
 		 
 		 Brand brand = new Brand();
 		 brand.setId(this.id);
-		 brand.setLabel(label);
+		 brand.setLabel(this.label);
 		 
 		 return brand;
 	 }

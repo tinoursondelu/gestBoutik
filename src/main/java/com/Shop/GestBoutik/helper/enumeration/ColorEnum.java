@@ -54,7 +54,7 @@ public enum ColorEnum {
 		 
 		 Color color = new Color();
 		 color.setId(this.id);
-		 color.setLabel(label);
+		 color.setLabel(this.label);
 		 
 		 return color;
 	 }

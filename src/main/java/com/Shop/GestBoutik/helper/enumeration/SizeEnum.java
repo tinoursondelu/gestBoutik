@@ -56,7 +56,7 @@ public enum SizeEnum {
 		 
 		 Size size = new Size();
 		 size.setId(this.id);
-		 size.setLabel(label);
+		 size.setLabel(this.label);
 		 
 		 return size;
 	 }
