@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.Shop.GestBoutik.helper.enumeration.BrandEnum;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -63,6 +65,7 @@ public class ItemStore extends Auditable implements Serializable {
 	
 	@ManyToOne
 	private Item item;
+	
 	
 	
 

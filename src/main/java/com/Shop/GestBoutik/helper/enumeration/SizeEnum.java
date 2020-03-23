@@ -1,5 +1,7 @@
 package com.Shop.GestBoutik.helper.enumeration;
 
+import com.Shop.GestBoutik.models.Size;
+
 /**
  * Entity class for handle Store type
  * @author Guiot Olivier
@@ -34,6 +36,30 @@ public enum SizeEnum {
 	public String getLabel() {
 		return label;
 	}
+	
+	 public static SizeEnum getSizeEnum(Long id)
+	 {
+		 SizeEnum result = null;
+		 
+		 for (SizeEnum sizeEnum : SizeEnum.values()) 
+		 {
+			 if ( id.equals(sizeEnum.getId()) )
+			 {
+				 result = sizeEnum;
+				 break;
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public Size getSize() {
+		 
+		 Size size = new Size();
+		 size.setId(this.id);
+		 size.setLabel(label);
+		 
+		 return size;
+	 }
 	
 
 }

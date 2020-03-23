@@ -1,5 +1,7 @@
 package com.Shop.GestBoutik.helper.enumeration;
 
+import com.Shop.GestBoutik.models.Color;
+
 /**
  * Entity class for handle Store type
  * @author Guiot Olivier
@@ -26,12 +28,36 @@ public enum ColorEnum {
 //	GETTERS
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getLabel() {
-		return label;
+		return this.label;
 	}
+	
+	 public static ColorEnum getBrandEnum(Long id)
+	 {
+		 ColorEnum result = null;
+		 
+		 for (ColorEnum colorEnum : ColorEnum.values()) 
+		 {
+			 if ( id.equals(colorEnum.getId()) )
+			 {
+				 result = colorEnum;
+				 break;
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public Color getColor() {
+		 
+		 Color color = new Color();
+		 color.setId(this.id);
+		 color.setLabel(label);
+		 
+		 return color;
+	 }
 	
 	
 

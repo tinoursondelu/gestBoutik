@@ -1,5 +1,7 @@
 package com.Shop.GestBoutik.helper.enumeration;
 
+import com.Shop.GestBoutik.models.Brand;
+
 /**
  * Entity class for handle Store type
  * @author Guiot Olivier
@@ -23,12 +25,36 @@ public enum BrandEnum {
 	
 //	GETTERS
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getLabel() {
-		return label;
+		return this.label;
 	}
+	
+	 public static BrandEnum getBrandEnum(Long id)
+	 {
+		 BrandEnum result = null;
+		 
+		 for (BrandEnum brandEnum : BrandEnum.values()) 
+		 {
+			 if ( id.equals(brandEnum.getId()) )
+			 {
+				 result = brandEnum;
+				 break;
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public Brand getBrand() {
+		 
+		 Brand brand = new Brand();
+		 brand.setId(this.id);
+		 brand.setLabel(label);
+		 
+		 return brand;
+	 }
 	
 
 }
