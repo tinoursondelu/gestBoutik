@@ -1,5 +1,6 @@
 package com.Shop.GestBoutik.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -29,8 +30,9 @@ import lombok.EqualsAndHashCode;
 @Valid
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item extends Auditable implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

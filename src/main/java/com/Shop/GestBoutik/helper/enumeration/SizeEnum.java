@@ -1,5 +1,11 @@
 package com.Shop.GestBoutik.helper.enumeration;
 
+/**
+ * Entity class for handle Store type
+ * @author Guiot Olivier
+ * @version 202003
+ *
+ */
 public enum SizeEnum {
 	
 	XS (1L, ""),

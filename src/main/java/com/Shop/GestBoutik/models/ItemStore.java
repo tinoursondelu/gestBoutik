@@ -1,5 +1,6 @@
 package com.Shop.GestBoutik.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -9,15 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-
-import com.Shop.GestBoutik.helper.enumeration.BrandEnum;
-import com.Shop.GestBoutik.helper.enumeration.ColorEnum;
-import com.Shop.GestBoutik.helper.enumeration.SizeEnum;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,7 +32,9 @@ import lombok.EqualsAndHashCode;
 @Valid
 @Entity
 @Table(name = "items_store")
-public class ItemStore {
+public class ItemStore extends Auditable implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,11 +46,14 @@ public class ItemStore {
 	@Column(nullable = false, unique = true)
 	private String designation;
 	
-	private ColorEnum color;
+	@OneToOne
+	private Color color;
 	
-	private SizeEnum size;
+	@OneToOne
+	private Size size;
 	
-	private BrandEnum brand;
+	@OneToOne
+	private Brand brand;
 
 	@ManyToMany
 	private Collection<Store> stores;
