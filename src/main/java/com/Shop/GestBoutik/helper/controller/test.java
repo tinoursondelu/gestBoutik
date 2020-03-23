@@ -18,14 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/test")
 public class test {
-	
+
 	@GetMapping("/test") /*ok*/
 	@ResponseBody
 	public void test() {
-		
+
 		System.out.println("marque id = " + BrandEnum.Nike.getId());
-System.out.println("taille id = " + SizeEnum.L.getId());
-System.out.println("couleur id = " + ColorEnum.Black.getId());
+		System.out.println("taille id = " + SizeEnum.L.getId());
+		System.out.println("couleur id = " + ColorEnum.Black.getId());
+		log.trace("plop");
 	}
 
 }
