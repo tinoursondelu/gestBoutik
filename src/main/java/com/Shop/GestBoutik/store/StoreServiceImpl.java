@@ -2,6 +2,7 @@ package com.Shop.GestBoutik.store;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreRepository storeRepository;
 
+	@Override
 	public void create(String designation) {
 
 		Store store = new Store();
@@ -23,6 +25,7 @@ public class StoreServiceImpl implements StoreService {
 		storeRepository.save(store);
 	}
 
+	@Override
 	public void create(StoreDto storeDto) {
 
 		Store store = new Store();
@@ -31,6 +34,7 @@ public class StoreServiceImpl implements StoreService {
 		storeRepository.save(store);
 	}
 
+	@Override
 	public Store update(Long id, StoreDto storeDto) {
 
 		Store store = new Store();
@@ -41,6 +45,15 @@ public class StoreServiceImpl implements StoreService {
 			storeRepository.save(store);
 		}
 		return store;
+	}
+	
+	@Override
+	public void delete(Long id) {
+		
+		Optional<Store> storeOpt = findById(id);
+		if (storeOpt.isPresent()) {
+			storeRepository.delete(storeOpt.get());
+		}
 	}
 
 
@@ -55,6 +68,7 @@ public class StoreServiceImpl implements StoreService {
 
 
 	//	PARSE MODEL TO DTO
+	@Override
 	public StoreDto parseModelToDto(Store store) {
 
 		StoreDto storeDto = new StoreDto();
@@ -66,6 +80,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	//	PARSE LIST MODEL TO DTO
+	@Override
 	public Collection<StoreDto> parseListModelToDto(Collection<Store> stores) {
 
 		Collection<StoreDto> storesDto = new ArrayList<StoreDto>();
@@ -77,6 +92,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	//	PARSE DTO TO MODEL
+	@Override
 	public Store parseDtoToModel(StoreDto storeDto) {
 
 		Store store = new Store();
@@ -99,6 +115,12 @@ public class StoreServiceImpl implements StoreService {
 	public Optional<Store> findById(Long id) {
 
 		return storeRepository.findById(id);
+	}
+
+	@Override
+	public List<Store> findAll() {
+		
+		return storeRepository.findAll();
 	}
 
 
