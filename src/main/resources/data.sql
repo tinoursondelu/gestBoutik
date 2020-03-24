@@ -27,3 +27,7 @@ INSERT INTO gestboutik.brands(id, label) VALUES
 (2, 'Pumas')
 
 ;
+
+--Stores
+INSERT INTO gestboutik.stores(id, designation) VALUES
+(1, 'Kiabi Paris 2eme');
