@@ -8,11 +8,6 @@ import com.Shop.GestBoutik.models.Store;
 
 public interface StoreService {
 
-	Optional<Store> findById(Long id);
-
-	List<Store> findAll();
-
-
 	//	METHODS
 	public void create(String designation);
 
@@ -27,5 +22,11 @@ public interface StoreService {
 	public Collection<StoreDto> parseListModelToDto(Collection<Store> stores);
 
 	public Store parseDtoToModel(StoreDto storeDto);
+	
+	
+//	DATA BASE
+	Optional<Store> findById(Long id);
+
+	List<Store> findAll();
 
 }
