@@ -11,12 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Shop.GestBoutik.helper.enumeration.BrandEnum;
-import com.Shop.GestBoutik.helper.enumeration.ColorEnum;
-import com.Shop.GestBoutik.helper.enumeration.SizeEnum;
 import com.Shop.GestBoutik.models.Brand;
 import com.Shop.GestBoutik.services.BrandServiceImpl;
-import com.Shop.GestBoutik.services.ColorServiceImpl;
-import com.Shop.GestBoutik.services.SizeServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,15 +25,9 @@ public class test {
 	@Autowired
 	private BrandServiceImpl brandService;
 	
-	@Autowired
-	private ColorServiceImpl ColorService;
-	
-	@Autowired
-	private SizeServiceImpl sizeService;
-	
 	
 
-	@GetMapping("/test") /*ok*/
+	@GetMapping("/1") /*ok*/
 	@ResponseBody
 	public void test() {
 		
@@ -51,12 +41,6 @@ public class test {
 				
 			}
 		}
-		
-
-		System.out.println("marque id = " + BrandEnum.Nike.getId());
-		System.out.println("taille id = " + SizeEnum.L.getId());
-		System.out.println("couleur id = " + ColorEnum.Black.getId());
-		log.trace("plop");
 	}
 
 }
