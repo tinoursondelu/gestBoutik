@@ -22,7 +22,17 @@ public class StoreServiceImpl implements StoreService {
 		Store store = new Store();
 
 		store.setDesignation(designation);
-		storeRepository.save(store);
+		
+		if (verifyIfStoreAlreadyExist(store)) {
+
+			try {
+				storeRepository.save(store);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This store designation is already in use");
+		}
 	}
 
 	@Override
@@ -31,7 +41,17 @@ public class StoreServiceImpl implements StoreService {
 		Store store = new Store();
 
 		store = parseDtoToModel(storeDto);
-		storeRepository.save(store);
+		
+		if (verifyIfStoreAlreadyExist(store)) {
+
+			try {
+				storeRepository.save(store);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This store designation is already in use");
+		}
 	}
 
 	@Override
@@ -46,14 +66,30 @@ public class StoreServiceImpl implements StoreService {
 		}
 		return store;
 	}
-	
+
 	@Override
 	public void delete(Long id) {
-		
+
 		Optional<Store> storeOpt = findById(id);
 		if (storeOpt.isPresent()) {
 			storeRepository.delete(storeOpt.get());
 		}
+	}
+
+	public boolean verifyIfStoreAlreadyExist(Store store) {
+
+		boolean verification = true;
+
+		List<Store> stores = findAll();
+
+		for (Store currentStore : stores) {
+
+			if (store.getDesignation().equals(currentStore.getDesignation())) {
+
+				verification = false;
+			}
+		}
+		return verification;
 	}
 
 
@@ -119,7 +155,7 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public List<Store> findAll() {
-		
+
 		return storeRepository.findAll();
 	}
 
