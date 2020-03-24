@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,10 @@ public class StoreController {
 	
 //	TODO: add method for search store by name
 	
+	/**
+	 * get list of stores
+	 * @return List<StoreDto>
+	 */
 	@GetMapping("/")
 	public List<StoreDto> listStores() {
 		
@@ -32,6 +37,11 @@ public class StoreController {
 		return (List<StoreDto>) storeService.parseListModelToDto(stores);
 	}
 	
+	/**
+	 * get detail Store
+	 * @param storeId
+	 * @return StoreDto
+	 */
 	@GetMapping("/{storeId")
 	public StoreDto storeDetail(@PathVariable("storeId") Long storeId) {
 		
@@ -48,19 +58,33 @@ public class StoreController {
 		return storeDto;
 	}
 	
+	/**
+	 * create new store
+	 * @param storeDto
+	 */
 	@PostMapping("/create")
 	public void createStore(@RequestBody StoreDto storeDto) {
 		
 		storeService.create(storeDto);
 	}
 	
-	@PostMapping("/delete")
-	public void CancelStore(@RequestBody StoreDto storeDto) {
+	/**
+	 * delete a store
+	 * @param storeDto
+	 */
+	@DeleteMapping("/delete")
+	public void deleteStore(@RequestBody StoreDto storeDto) {
 		
 		storeService.delete(storeDto.getId());
 		
 	}
 	
+	/**
+	 * update a store
+	 * @param storeId
+	 * @param storeDto
+	 * @return Store
+	 */
 	@PutMapping(path = "{storeId}")
 	public Store updateStore(@PathVariable("storeId") Long storeId, @RequestBody StoreDto storeDto) {
 		
