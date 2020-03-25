@@ -50,6 +50,8 @@ public class Shelve extends Auditable implements Serializable {
 
 	@ManyToMany
 	private Collection<ItemStore> itemsStore;
+	
+	
 
 
 

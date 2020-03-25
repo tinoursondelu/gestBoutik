@@ -31,3 +31,13 @@ INSERT INTO gestboutik.brands(id, label) VALUES
 --Stores
 INSERT INTO gestboutik.stores(id, designation) VALUES
 (1, 'Kiabi Paris 2eme');
+
+
+--Shelves
+INSERT INTO gestboutik.shelves(id, designation, store_id) VALUES
+(1, 'Fashion', 1),
+(2, 'Décalée', 1),
+(3, 'Femme enceinte', 1),
+(4, 'Homme', 1)
+
+;

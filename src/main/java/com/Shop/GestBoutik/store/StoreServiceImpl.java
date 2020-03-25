@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 
 		store.setDesignation(designation);
 		
-		if (verifyIfStoreAlreadyExist(store)) {
+		if (!verifyIfStoreAlreadyExist(store)) {
 
 			try {
 				storeRepository.save(store);
@@ -58,7 +58,7 @@ public class StoreServiceImpl implements StoreService {
 
 		store = parseDtoToModel(storeDto);
 		
-		if (verifyIfStoreAlreadyExist(store)) {
+		if (!verifyIfStoreAlreadyExist(store)) {
 
 			try {
 				storeRepository.save(store);
@@ -78,16 +78,16 @@ public class StoreServiceImpl implements StoreService {
 	 * @return Store
 	 */
 	@Override
-	public Store update(Long id, StoreDto storeDto) {
+	public Store update(StoreDto storeDto) {
 
 		Store store = new Store();
 
-		Optional<Store> storeOpt = findById(id);
+		Optional<Store> storeOpt = findById(storeDto.getId());
 		if (storeOpt.isPresent()) {
 			
 			store = parseDtoToModel(storeDto);
 			
-			if (verifyIfStoreAlreadyExist(store)) {
+			if (!verifyIfStoreAlreadyExist(store)) {
 
 				try {
 					storeRepository.save(store);
@@ -111,7 +111,13 @@ public class StoreServiceImpl implements StoreService {
 
 		Optional<Store> storeOpt = findById(id);
 		if (storeOpt.isPresent()) {
-			storeRepository.delete(storeOpt.get());
+			
+			try {
+				storeRepository.delete(storeOpt.get());
+			} catch (Exception e) {
+				System.out.println("Error while attempt to delete this shelve");
+			}
+			
 		}
 	}
 	
@@ -123,7 +129,7 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	public boolean verifyIfStoreAlreadyExist(Store store) {
 
-		boolean verification = true;
+		boolean verification = false;
 
 		List<Store> stores = findAll();
 
@@ -131,7 +137,7 @@ public class StoreServiceImpl implements StoreService {
 
 			if (store.getDesignation().equals(currentStore.getDesignation())) {
 
-				verification = false;
+				verification = true;
 			}
 		}
 		return verification;
