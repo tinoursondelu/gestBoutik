@@ -85,10 +85,10 @@ public class StoreController {
 	 * @param storeDto
 	 * @return Store
 	 */
-	@PutMapping(path = "{storeId}")
-	public Store updateStore(@PathVariable("storeId") Long storeId, @RequestBody StoreDto storeDto) {
+	@PutMapping("/update")
+	public Store updateStore(@RequestBody StoreDto storeDto) {
 		
-		return storeService.update(storeId, storeDto);
+		return storeService.update(storeDto);
 	}
 
 }

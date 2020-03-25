@@ -35,7 +35,7 @@ public class ShelveServiceImpl implements ShelveService {
 		shelve.setDesignation(designation);
 		shelve.setStore(store);
 		
-		if (verifyIfShelveAlreadyExist(shelve)) {
+		if (!verifyIfShelveAlreadyExist(shelve)) {
 
 			try {
 				shelveRepository.save(shelve);
@@ -60,7 +60,7 @@ public class ShelveServiceImpl implements ShelveService {
 		
 		shelve = parseDtoToModel(shelveDto);
 		
-		if (verifyIfShelveAlreadyExist(shelve)) {
+		if (!verifyIfShelveAlreadyExist(shelve)) {
 			
 			try {
 				shelveRepository.save(shelve);
@@ -81,16 +81,16 @@ public class ShelveServiceImpl implements ShelveService {
 	 * @return shelve
 	 */
 	@Override
-	public Shelve update(Long id, ShelveDto shelveDto) {
+	public Shelve update(ShelveDto shelveDto) {
 		
 		Shelve shelve = new Shelve();
 		
-		Optional<Shelve> shelveOpt = findById(id);
+		Optional<Shelve> shelveOpt = findById(shelveDto.getId());
 		if (shelveOpt.isPresent()) {
 			
 			shelve = parseDtoToModel(shelveDto);
 			
-			if (verifyIfShelveAlreadyExist(shelve)) {
+			if (!verifyIfShelveAlreadyExist(shelve)) {
 				
 				try {
 					shelveRepository.save(shelve);

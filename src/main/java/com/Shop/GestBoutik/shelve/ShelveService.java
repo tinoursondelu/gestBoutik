@@ -15,7 +15,7 @@ public interface ShelveService {
 	
 	public void create(ShelveDto shelveDto);
 	
-	public Shelve update(Long id, ShelveDto shelveDto);
+	public Shelve update(ShelveDto shelveDto);
 	
 	public void delete(Long id);	
 	

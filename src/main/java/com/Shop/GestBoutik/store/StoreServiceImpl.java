@@ -78,11 +78,11 @@ public class StoreServiceImpl implements StoreService {
 	 * @return Store
 	 */
 	@Override
-	public Store update(Long id, StoreDto storeDto) {
+	public Store update(StoreDto storeDto) {
 
 		Store store = new Store();
 
-		Optional<Store> storeOpt = findById(id);
+		Optional<Store> storeOpt = findById(storeDto.getId());
 		if (storeOpt.isPresent()) {
 			
 			store = parseDtoToModel(storeDto);
