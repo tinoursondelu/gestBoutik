@@ -24,8 +24,12 @@ public interface StoreService {
 	public Store parseDtoToModel(StoreDto storeDto);
 	
 	
+	
+	
 //	DATA BASE
 	Optional<Store> findById(Long id);
+	
+	Optional<Store> findByDesignation(String designation);
 
 	List<Store> findAll();
 

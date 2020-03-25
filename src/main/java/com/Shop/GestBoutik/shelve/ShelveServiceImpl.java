@@ -35,7 +35,7 @@ public class ShelveServiceImpl implements ShelveService {
 		shelve.setDesignation(designation);
 		shelve.setStore(store);
 		
-		if (!verifyIfShelveAlreadyExist(shelve)) {
+		if (!verifyIfAlreadyExist(shelve)) {
 
 			try {
 				shelveRepository.save(shelve);
@@ -60,7 +60,7 @@ public class ShelveServiceImpl implements ShelveService {
 		
 		shelve = parseDtoToModel(shelveDto);
 		
-		if (!verifyIfShelveAlreadyExist(shelve)) {
+		if (!verifyIfAlreadyExist(shelve)) {
 			
 			try {
 				shelveRepository.save(shelve);
@@ -90,7 +90,7 @@ public class ShelveServiceImpl implements ShelveService {
 			
 			shelve = parseDtoToModel(shelveDto);
 			
-			if (!verifyIfShelveAlreadyExist(shelve)) {
+			if (!verifyIfAlreadyExist(shelve)) {
 				
 				try {
 					shelveRepository.save(shelve);
@@ -124,20 +124,9 @@ public class ShelveServiceImpl implements ShelveService {
 	}
 	
 	
-	public boolean verifyIfShelveAlreadyExist(Shelve shelve) {
-		
-		boolean verification = false;
+	public boolean verifyIfAlreadyExist(Shelve shelve) {
 
-		List<Shelve> shelves = findAll();
-
-		for (Shelve currentShelve : shelves) {
-
-			if (shelve.getDesignation().equals(currentShelve.getDesignation())) {
-
-				verification = true;
-			}
-		}
-		return verification;
+		return shelveRepository.findByDesignation(shelve.getDesignation()).isPresent();
 	}
 	
 	
@@ -231,6 +220,13 @@ public class ShelveServiceImpl implements ShelveService {
 	public List<Shelve> findAllByStoreId(Long storeId) {
 		
 		return shelveRepository.findAllByStoreId(storeId);
+	}
+
+
+	@Override
+	public Optional<Shelve> findByDesignation(String designation) {
+		
+		return shelveRepository.findByDesignation(designation);
 	}
 
 

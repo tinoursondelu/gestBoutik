@@ -29,6 +29,8 @@ public interface ShelveService {
 //	DATA BASE
 	public Optional<Shelve> findById(Long id);
 	
+	Optional<Shelve> findByDesignation(String designation);
+	
 	public List<Shelve> findAll();
 	
 	public List<Shelve> findAllByStoreId(Long storeId);
