@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 
 		store.setDesignation(designation);
 		
-		if (verifyIfStoreAlreadyExist(store)) {
+		if (!verifyIfStoreAlreadyExist(store)) {
 
 			try {
 				storeRepository.save(store);
@@ -58,7 +58,7 @@ public class StoreServiceImpl implements StoreService {
 
 		store = parseDtoToModel(storeDto);
 		
-		if (verifyIfStoreAlreadyExist(store)) {
+		if (!verifyIfStoreAlreadyExist(store)) {
 
 			try {
 				storeRepository.save(store);
@@ -87,7 +87,7 @@ public class StoreServiceImpl implements StoreService {
 			
 			store = parseDtoToModel(storeDto);
 			
-			if (verifyIfStoreAlreadyExist(store)) {
+			if (!verifyIfStoreAlreadyExist(store)) {
 
 				try {
 					storeRepository.save(store);
@@ -129,7 +129,7 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	public boolean verifyIfStoreAlreadyExist(Store store) {
 
-		boolean verification = true;
+		boolean verification = false;
 
 		List<Store> stores = findAll();
 
@@ -137,7 +137,7 @@ public class StoreServiceImpl implements StoreService {
 
 			if (store.getDesignation().equals(currentStore.getDesignation())) {
 
-				verification = false;
+				verification = true;
 			}
 		}
 		return verification;

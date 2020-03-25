@@ -30,5 +30,7 @@ public interface ShelveService {
 	public Optional<Shelve> findById(Long id);
 	
 	public List<Shelve> findAll();
+	
+	public List<Shelve> findAllByStoreId(Long storeId);
 
 }

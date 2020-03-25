@@ -126,7 +126,7 @@ public class ShelveServiceImpl implements ShelveService {
 	
 	public boolean verifyIfShelveAlreadyExist(Shelve shelve) {
 		
-		boolean verification = true;
+		boolean verification = false;
 
 		List<Shelve> shelves = findAll();
 
@@ -134,7 +134,7 @@ public class ShelveServiceImpl implements ShelveService {
 
 			if (shelve.getDesignation().equals(currentShelve.getDesignation())) {
 
-				verification = false;
+				verification = true;
 			}
 		}
 		return verification;
@@ -225,6 +225,12 @@ public class ShelveServiceImpl implements ShelveService {
 	public List<Shelve> findAll() {
 
 		return shelveRepository.findAll();
+	}
+	
+	@Override
+	public List<Shelve> findAllByStoreId(Long storeId) {
+		
+		return shelveRepository.findAllByStoreId(storeId);
 	}
 
 

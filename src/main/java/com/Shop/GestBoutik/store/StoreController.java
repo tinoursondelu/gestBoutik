@@ -52,7 +52,7 @@ public class StoreController {
 			storeDto = storeService.parseModelToDto(storeOpt.get());
 		}
 		else {
-			System.out.println("User with id '" + storeId + "' not found");
+			System.out.println("Store with id '" + storeId + "' not found");
 		}
 		
 		return storeDto;
