@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -16,14 +15,13 @@ public class ItemStoreDto {
 
     private String designation ;
 
-    private Color color ;
+    private Long IdColor ;
 
-    private Size size ;
+    private Long IdSize;
 
-    private Brand brand ;
+    private Long IdBrand;
 
-    private Collection<Store> stores ;
+    private Long IdItem;
 
-    private Item item ;
 
 }
