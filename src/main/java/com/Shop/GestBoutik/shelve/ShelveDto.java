@@ -9,7 +9,7 @@ public class ShelveDto {
 	
 	private Long idStore;
 	
-	private String designation; 
+	private String designation;
 	
 
 
