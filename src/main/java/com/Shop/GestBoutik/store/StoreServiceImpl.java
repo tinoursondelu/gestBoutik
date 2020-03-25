@@ -111,7 +111,13 @@ public class StoreServiceImpl implements StoreService {
 
 		Optional<Store> storeOpt = findById(id);
 		if (storeOpt.isPresent()) {
-			storeRepository.delete(storeOpt.get());
+			
+			try {
+				storeRepository.delete(storeOpt.get());
+			} catch (Exception e) {
+				System.out.println("Error while attempt to delete this shelve");
+			}
+			
 		}
 	}
 	

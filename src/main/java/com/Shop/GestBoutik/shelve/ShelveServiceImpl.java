@@ -22,6 +22,108 @@ public class ShelveServiceImpl implements ShelveService {
 	private StoreService storeService;
 	
 	
+	/**
+	 * create new shelve (for develop tests)
+	 * @param designation
+	 * @param store
+	 */
+	@Override
+	public void create(String designation, Store store) {
+		
+		Shelve shelve = new Shelve();
+
+		shelve.setDesignation(designation);
+		shelve.setStore(store);
+		
+		if (verifyIfShelveAlreadyExist(shelve)) {
+
+			try {
+				shelveRepository.save(shelve);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This shleve designation is already in use");
+		}
+		
+	}
+	
+	
+	/**
+	 * create new shelve
+	 * @param shelveDto
+	 */
+	@Override
+	public void create(ShelveDto shelveDto) {
+		
+		Shelve shelve = new Shelve();
+		
+		shelve = parseDtoToModel(shelveDto);
+		
+		if (verifyIfShelveAlreadyExist(shelve)) {
+			
+			try {
+				shelveRepository.save(shelve);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This shelve designation is already in use");
+		}
+		
+	}
+	
+	
+	/**
+	 * update an existing shelve
+	 * @param id
+	 * @param shelveDto
+	 * @return shelve
+	 */
+	@Override
+	public Shelve update(Long id, ShelveDto shelveDto) {
+		
+		Shelve shelve = new Shelve();
+		
+		Optional<Shelve> shelveOpt = findById(id);
+		if (shelveOpt.isPresent()) {
+			
+			shelve = parseDtoToModel(shelveDto);
+			
+			if (verifyIfShelveAlreadyExist(shelve)) {
+				
+				try {
+					shelveRepository.save(shelve);
+				} catch (Exception e) {
+					System.out.println(e.getCause());
+				}
+			} else {
+				System.out.println("This shelve designation is already in use");
+			}
+		}
+		return shelve;
+	}
+	
+	
+	/**
+	 * delete an existing shelve
+	 * @param id
+	 */
+	@Override
+	public void delete(Long id) {
+		
+		Optional<Shelve> shelveOpt = findById(id);
+		if (shelveOpt.isPresent()) {
+			
+			try {
+				shelveRepository.delete(shelveOpt.get());
+			} catch (Exception e) {
+				System.out.println("Error while attempt to delete this shelve");
+			}
+		}
+	}
+	
+	
 	public boolean verifyIfShelveAlreadyExist(Shelve shelve) {
 		
 		boolean verification = true;
