@@ -131,6 +131,22 @@ public class StoreServiceImpl implements StoreService {
 
 		return storeRepository.findByDesignation(store.getDesignation()).isPresent();
 	}
+	
+	boolean verifyIfAlreadyExistWithExclusion(Store store) {
+
+		Optional<Store> dbStore = findByDesignation(store.getDesignation());
+		
+		if (dbStore.isPresent()) {
+
+			if (dbStore.get().getId() == store.getId()) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
 
 
 

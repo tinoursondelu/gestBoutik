@@ -90,7 +90,7 @@ public class ShelveServiceImpl implements ShelveService {
 			
 			shelve = parseDtoToModel(shelveDto);
 			
-			if (!verifyIfAlreadyExist(shelve)) {
+			if (!verifyIfAlreadyExistWithExclusion(shelve)) {
 				
 				try {
 					shelveRepository.save(shelve);
@@ -127,6 +127,23 @@ public class ShelveServiceImpl implements ShelveService {
 	public boolean verifyIfAlreadyExist(Shelve shelve) {
 
 		return shelveRepository.findByDesignation(shelve.getDesignation()).isPresent();
+	}
+	
+	public boolean verifyIfAlreadyExistWithExclusion(Shelve shelve) {
+
+		Optional<Shelve> dbShelve = findByDesignation(shelve.getDesignation());
+
+		if (dbShelve.isPresent()) {
+
+			if (dbShelve.get().getId() == shelve.getId()) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+
+		}
 	}
 	
 	
