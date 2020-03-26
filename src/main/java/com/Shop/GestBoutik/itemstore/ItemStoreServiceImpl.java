@@ -68,4 +68,30 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 
         return itemStoreDto;
     }
+
+    @Override
+    public void create(ItemStoreDto itemStoreDto) {
+
+        ItemStore itemStore = new ItemStore();
+        itemStore = parseDtoToModel(itemStoreDto);
+        itemStoreRepository.save(itemStore);
+    }
+
+    @Override
+    public void delete(long id) {
+        Optional<ItemStore> itemStoreDel = findById(id);
+        itemStoreDel.ifPresent(itemStore -> itemStoreRepository.delete(itemStore));
+    }
+
+    @Override
+    public void update(long id, ItemStoreDto itemStoreDto) {
+
+        ItemStore itemStore = new ItemStore();
+        Optional<ItemStore> itemStoreUpd = findById(id);
+
+        if(itemStoreUpd.isPresent()) {
+            itemStore = parseDtoToModel(itemStoreDto);
+            itemStoreRepository.save(itemStore);
+        }
+    }
 }

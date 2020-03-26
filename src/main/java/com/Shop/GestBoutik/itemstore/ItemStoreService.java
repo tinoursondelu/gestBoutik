@@ -13,4 +13,7 @@ public interface ItemStoreService {
     public ItemStore parseDtoToModel(ItemStoreDto itemStoreDto);
     public Collection<ItemStoreDto>parseCollectionModelToDto(Collection<ItemStore> itemStores);
     public ItemStoreDto parseModelToDto(ItemStore itemStore);
+    public void create(ItemStoreDto itemStoreDto);
+    public void delete(long id);
+    public void update(long id , ItemStoreDto itemStoreDto);
 }
