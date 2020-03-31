@@ -15,13 +15,13 @@ public class ItemStoreDto {
 
     private String designation ;
 
-    private Long IdColor ;
+    private Long idColor ;
 
-    private Long IdSize;
+    private Long idSize;
 
-    private Long IdBrand;
+    private Long idBrand;
 
-    private Long IdItem;
+    private Long idItem;
 
 
 }

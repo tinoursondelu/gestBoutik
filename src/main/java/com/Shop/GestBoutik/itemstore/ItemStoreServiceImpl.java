@@ -41,6 +41,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         itemStore.setColor(colorService.findById(itemStoreDto.getIdColor()).get());
         itemStore.setSize(sizeService.findById(itemStoreDto.getIdSize()).get());
         itemStore.setBrand(brandService.findById(itemStoreDto.getIdBrand()).get());
+
         return itemStore;
     }
 
