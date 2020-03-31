@@ -23,7 +23,10 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	
+	/**
+	 * Get all the items
+	 * @return List<ItemDto>
+	 */
 	@GetMapping("/all")
 	public List<ItemDto> listItems() {
 		
@@ -32,6 +35,11 @@ public class ItemController {
 		return (List<ItemDto>) itemService.parseListModelToDto(items);
 	}
 	
+	/**
+	 * Get an item by id
+	 * @param itemId
+	 * @return ItemDto itemDto
+	 */
 	@GetMapping("/{itemId}")
 	public ItemDto itemDetails(@PathVariable("itemId") Long itemId) {
 
@@ -49,18 +57,31 @@ public class ItemController {
 		return itemDto;
 	}
 
+	/**
+	 * Create a new item
+	 * @param itemDto
+	 */
 	@PostMapping("/create")
 	public void createItem(@RequestBody ItemDto itemDto) {
 		
 		itemService.create(itemDto);
 	}
 	
+	/**
+	 * Update an item
+	 * @param itemDto
+	 * @return ItemDto itemDto
+	 */
 	@PostMapping("/update")
 	public ItemDto updateItem(@RequestBody ItemDto itemDto) {
 		
 		return itemService.parseModelToDto(itemService.update(itemDto));
 	}
 	
+	/**
+	 * Delete an item
+	 * @param itemDto
+	 */
 	@PostMapping("/delete")
 	public void deleteItem(@RequestBody ItemDto itemDto) {
 		

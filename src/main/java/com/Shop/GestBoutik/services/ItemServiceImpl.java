@@ -35,6 +35,10 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findAll();
 	}
 	
+	/**
+	 * 
+	 * @param itemDto
+	 */
 	@Override
 	public void create(ItemDto itemDto) {
 
@@ -54,7 +58,11 @@ public class ItemServiceImpl implements ItemService{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param itemDto
+	 * @return Item item
+	 */
 	@Override
 	public Item update(ItemDto itemDto) {
 
@@ -80,6 +88,10 @@ public class ItemServiceImpl implements ItemService{
 		return item;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	@Override
 	public void delete(Long id) {
 
@@ -99,7 +111,7 @@ public class ItemServiceImpl implements ItemService{
 	/**
 	 * 
 	 * @param item
-	 * @return
+	 * @return boolean
 	 */
 	@Override
 	public boolean exists(Item item) {
@@ -109,6 +121,11 @@ public class ItemServiceImpl implements ItemService{
 		return itemOpt.isPresent();
 	}
 	
+	/**
+	 * 
+	 * @param item
+	 * @return ItemDto itemDto
+	 */
 	@Override
 	public ItemDto parseModelToDto(Item item) {
 
@@ -120,6 +137,11 @@ public class ItemServiceImpl implements ItemService{
 		return itemDto;
 	}
 
+	/**
+	 * 
+	 * @param items
+	 * @return Collection<ItemDto> itemsDto
+	 */
 	@Override
 	public Collection<ItemDto> parseListModelToDto(Collection<Item> items) {
 
@@ -131,6 +153,11 @@ public class ItemServiceImpl implements ItemService{
 		return itemsDto;
 	}
 
+	/**
+	 * 
+	 * @param itemDto
+	 * @return Item item
+	 */
 	@Override
 	public Item parseDtoToModel(ItemDto itemDto) {
 
