@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
@@ -43,6 +44,7 @@ public class Item extends Auditable implements Serializable {
 	@Length(min = 3, max = 30)
 	@Column(nullable = false, unique = true)
 	private String designation;
+
 
 	@OneToMany(mappedBy = "item")
 	private Collection<ItemStore> itemsStore;

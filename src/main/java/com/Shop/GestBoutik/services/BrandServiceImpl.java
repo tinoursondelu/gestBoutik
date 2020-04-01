@@ -2,6 +2,7 @@ package com.Shop.GestBoutik.services;
 
 import java.util.Optional;
 
+import com.Shop.GestBoutik.models.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

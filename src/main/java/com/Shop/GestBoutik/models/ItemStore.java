@@ -3,18 +3,11 @@ package com.Shop.GestBoutik.models;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
@@ -46,18 +39,18 @@ public class ItemStore extends Auditable implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String designation;
 	
-	@OneToOne
+	@ManyToOne
 	private Color color;
 	
-	@OneToOne
+	@ManyToOne
 	private Size size;
 	
-	@OneToOne
+	@ManyToOne
 	private Brand brand;
 
 	@ManyToMany
 	private Collection<Store> stores;
-	
+
 	@ManyToMany(mappedBy = "itemsStore")
 	private Collection<Shelve> shelves;
 	
