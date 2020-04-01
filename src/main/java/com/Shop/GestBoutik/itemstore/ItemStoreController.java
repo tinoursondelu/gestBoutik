@@ -1,10 +1,7 @@
 package com.Shop.GestBoutik.itemstore;
 
-import com.Shop.GestBoutik.models.ItemStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,8 +11,13 @@ public class ItemStoreController {
     @Autowired ItemStoreService itemStoreService ;
 
     @GetMapping("/")
-    public List<ItemStore> listItemStore() {
-        return itemStoreService.findAll();
+    public List<ItemStoreDto> listItemStore() {
+        return itemStoreService.parseListModelToDto(itemStoreService.findAll());
+    }
+
+    @GetMapping("/{itemStoreId}")
+    public ItemStoreDto ItemStoreDetail(@PathVariable("itemStoreId") Long id) {
+        return itemStoreService.findOne(id);
     }
 
     @PostMapping("/create")

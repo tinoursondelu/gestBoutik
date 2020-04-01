@@ -45,7 +45,7 @@ public class Item extends Auditable implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String designation;
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "item")
 	private Collection<ItemStore> itemsStore;
 

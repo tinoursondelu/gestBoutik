@@ -35,7 +35,7 @@ public class Size {
 	@Column(nullable = false, unique = true)
 	private String label;
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "size")
 	private List<ItemStore> itemStores;
 

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +30,12 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         return itemStoreRepository.findById(id);
     }
 
+    @Override
+    public ItemStoreDto findOne(Long id) {
+        ItemStoreDto itemStoreDto = new ItemStoreDto();
+        itemStoreDto = parseModelToDto(itemStoreRepository.getOne(id));
+        return itemStoreDto;
+    }
 
     @Override
     public ItemStore parseDtoToModel(ItemStoreDto itemStoreDto) {
@@ -46,14 +51,15 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     }
 
     @Override
-    public Collection<ItemStoreDto> parseCollectionModelToDto(Collection<ItemStore> itemStores) {
+    public List<ItemStoreDto> parseListModelToDto(List<ItemStore> itemStores) {
 
-        Collection<ItemStoreDto>itemStoreDtoCollection = new ArrayList<ItemStoreDto>();
+        List<ItemStoreDto> itemStoreDtoList = new ArrayList<>();
+
         for(ItemStore itemStore: itemStores)
         {
-            itemStoreDtoCollection.add(parseModelToDto(itemStore));
+            itemStoreDtoList.add(parseModelToDto(itemStore));
         }
-        return itemStoreDtoCollection;
+        return itemStoreDtoList;
     }
 
     @Override

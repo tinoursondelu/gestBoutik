@@ -35,7 +35,7 @@ public class Brand {
 	@Column(nullable = false, unique = true)
 	private String label;
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "brand")
 	private List<ItemStore> itemStores;
 

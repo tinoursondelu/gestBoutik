@@ -35,7 +35,7 @@ public class Color {
 	@Column(nullable = false, unique = true)
 	private String label;
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "color")
 	private List<ItemStore> itemStores;
 
