@@ -51,9 +51,9 @@ INSERT INTO gestboutik.items(id, designation) VALUES
 ;
 
 -- ItemStore
-INSERT INTO gestboutik.items_store(id, designation, item_id, brand_id, color_id, size_id) VALUES
-(1, 'Pantalon Nike Black XL', 1, 1, 5, 5),
-(2, 'Pantalon Nike Black XXL', 1, 1, 5, 6)
+INSERT INTO gestboutik.items_store(id, designation, item_id, brand_id, color_id, shelve_id, size_id) VALUES
+(1, 'Pantalon Nike Black XL', 1, 1, 5, 4, 5),
+(2, 'Pantalon Nike Black XXL', 1, 1, 5, 4, 6)
 
 ;
 
@@ -67,8 +67,8 @@ INSERT INTO gestboutik.items_store_stores(items_store_id, stores_id) VALUES
 
 
  -- shelves_items_store
- INSERT INTO gestboutik.shelves_items_store(shelves_id, items_store_id) VALUES
- (4, 1),
- (4, 2)
+-- INSERT INTO gestboutik.shelves_items_store(shelves_id, items_store_id) VALUES
+ --(4, 1),
+ --(4, 2)
 
- ;
+ --;
