@@ -15,5 +15,7 @@ public interface ItemStoreService {
     public ItemStoreDto parseModelToDto(ItemStore itemStore);
     public void create(ItemStoreDto itemStoreDto);
     public void delete(long id);
-    public void update(long id , ItemStoreDto itemStoreDto);
+    public ItemStore update(long id , ItemStoreDto itemStoreDto);
+	boolean exists(ItemStore itemStore);
+	boolean existsWithExclusion(ItemStore itemStore);
 }
