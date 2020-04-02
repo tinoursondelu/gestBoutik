@@ -1,6 +1,8 @@
 package com.Shop.GestBoutik.itemstore;
 
+import com.Shop.GestBoutik.models.Item;
 import com.Shop.GestBoutik.models.ItemStore;
+import com.Shop.GestBoutik.models.Shelve;
 import com.Shop.GestBoutik.services.BrandServiceImpl;
 import com.Shop.GestBoutik.services.ColorServiceImpl;
 import com.Shop.GestBoutik.services.ItemServiceImpl;
@@ -91,7 +93,17 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 
         ItemStore itemStore = new ItemStore();
         itemStore = parseDtoToModel(itemStoreDto);
-        itemStoreRepository.save(itemStore);
+		
+		if (!exists(itemStore)) {
+
+			try {
+				itemStoreRepository.save(itemStore);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This item designation already exists");
+		}
     }
 
     @Override
@@ -101,14 +113,46 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     }
 
     @Override
-    public void update(long id, ItemStoreDto itemStoreDto) {
+    public ItemStore update(long id, ItemStoreDto itemStoreDto) {
 
         ItemStore itemStore = new ItemStore();
         Optional<ItemStore> itemStoreUpd = findById(id);
 
         if(itemStoreUpd.isPresent()) {
             itemStore = parseDtoToModel(itemStoreDto);
-            itemStoreRepository.save(itemStore);
+            
+            if(!existsWithExclusion(itemStore)) {
+				try {
+					itemStoreRepository.save(itemStore);
+				} catch (Exception e) {
+					System.out.println(e.getCause());
+				}
+			}
+			else {
+				System.out.println("This item designation already exists");
+			}
         }
-    }
+        
+        return itemStore;
+    } 
+    
+    
+    @Override
+	public boolean exists(ItemStore itemStore) {
+		
+		Optional<ItemStore> itemStoreOpt = itemStoreRepository.findByDesignation(itemStore.getDesignation());
+		
+		return itemStoreOpt.isPresent();
+	}
+    
+    @Override
+    public boolean existsWithExclusion(ItemStore itemStore) {
+
+		Optional<ItemStore> itemStoreOpt = itemStoreRepository.findByDesignation(itemStore.getDesignation());
+		
+		return itemStoreOpt.isPresent() && itemStoreOpt.get().getId() != itemStore.getId();
+		
+		
+		
+	}
 }
