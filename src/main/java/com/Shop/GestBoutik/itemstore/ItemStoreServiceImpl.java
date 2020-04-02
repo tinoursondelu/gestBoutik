@@ -3,6 +3,7 @@ package com.Shop.GestBoutik.itemstore;
 import com.Shop.GestBoutik.models.ItemStore;
 import com.Shop.GestBoutik.services.BrandServiceImpl;
 import com.Shop.GestBoutik.services.ColorServiceImpl;
+import com.Shop.GestBoutik.services.ItemServiceImpl;
 import com.Shop.GestBoutik.services.SizeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     @Autowired ItemStoreRepository itemStoreRepository;
     @Autowired ColorServiceImpl colorService;
     @Autowired SizeServiceImpl sizeService;
-    @Autowired BrandServiceImpl brandService;;
+    @Autowired BrandServiceImpl brandService;
+    @Autowired ItemServiceImpl itemService;
 
 
     @Override
@@ -46,6 +48,8 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         itemStore.setColor(colorService.findById(itemStoreDto.getIdColor()).get());
         itemStore.setSize(sizeService.findById(itemStoreDto.getIdSize()).get());
         itemStore.setBrand(brandService.findById(itemStoreDto.getIdBrand()).get());
+        //TO DO: SET ITEM - DONE
+        itemStore.setItem(itemService.findById(itemStoreDto.getIdItem()).get());
 
         return itemStore;
     }
