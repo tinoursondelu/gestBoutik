@@ -43,13 +43,19 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     public ItemStore parseDtoToModel(ItemStoreDto itemStoreDto) {
         ItemStore itemStore = new ItemStore();
 
+
         itemStore.setId(itemStoreDto.getId());
-        itemStore.setDesignation(itemStoreDto.getDesignation());
         itemStore.setColor(colorService.findById(itemStoreDto.getIdColor()).get());
         itemStore.setSize(sizeService.findById(itemStoreDto.getIdSize()).get());
         itemStore.setBrand(brandService.findById(itemStoreDto.getIdBrand()).get());
         //TO DO: SET ITEM - DONE
         itemStore.setItem(itemService.findById(itemStoreDto.getIdItem()).get());
+        itemStore.setDesignation(
+                itemStore.getItem().getDesignation()+ " " +
+                itemStore.getBrand().getLabel()+ " " +
+                itemStore.getColor().getLabel()+ " " +
+                itemStore.getSize().getLabel()
+        );
 
         return itemStore;
     }
