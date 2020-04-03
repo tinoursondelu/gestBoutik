@@ -51,8 +51,8 @@ public class ItemStore extends Auditable implements Serializable {
 	@ManyToMany
 	private Collection<Store> stores;
 
-	@ManyToMany(mappedBy = "itemsStore")
-	private Collection<Shelve> shelves;
+	@ManyToOne
+	private Shelve shelve ;
 	
 	@ManyToOne
 	private Item item;

@@ -1,9 +1,14 @@
 package com.Shop.GestBoutik.itemstore;
 
+import com.Shop.GestBoutik.models.Item;
 import com.Shop.GestBoutik.models.ItemStore;
+import com.Shop.GestBoutik.models.Shelve;
 import com.Shop.GestBoutik.services.BrandServiceImpl;
 import com.Shop.GestBoutik.services.ColorServiceImpl;
+import com.Shop.GestBoutik.services.ItemServiceImpl;
 import com.Shop.GestBoutik.services.SizeServiceImpl;
+import com.Shop.GestBoutik.shelve.ShelveService;
+import com.Shop.GestBoutik.shelve.ShelveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +22,9 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     @Autowired ItemStoreRepository itemStoreRepository;
     @Autowired ColorServiceImpl colorService;
     @Autowired SizeServiceImpl sizeService;
-    @Autowired BrandServiceImpl brandService;;
+    @Autowired BrandServiceImpl brandService;
+    @Autowired ItemServiceImpl itemService;
+    @Autowired ShelveServiceImpl shelveService;
 
 
     @Override
@@ -41,11 +48,20 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     public ItemStore parseDtoToModel(ItemStoreDto itemStoreDto) {
         ItemStore itemStore = new ItemStore();
 
+
         itemStore.setId(itemStoreDto.getId());
-        itemStore.setDesignation(itemStoreDto.getDesignation());
         itemStore.setColor(colorService.findById(itemStoreDto.getIdColor()).get());
         itemStore.setSize(sizeService.findById(itemStoreDto.getIdSize()).get());
         itemStore.setBrand(brandService.findById(itemStoreDto.getIdBrand()).get());
+        itemStore.setShelve(shelveService.findById(itemStoreDto.getIdShelve()).get());
+        //TO DO: SET ITEM - DONE
+        itemStore.setItem(itemService.findById(itemStoreDto.getIdItem()).get());
+        itemStore.setDesignation(
+                itemStore.getItem().getDesignation()+ " " +
+                itemStore.getBrand().getLabel()+ " " +
+                itemStore.getColor().getLabel()+ " " +
+                itemStore.getSize().getLabel()
+        );
 
         return itemStore;
     }
@@ -72,6 +88,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         itemStoreDto.setIdBrand(itemStore.getBrand().getId());
         itemStoreDto.setIdSize(itemStore.getSize().getId());
         itemStoreDto.setIdItem(itemStore.getItem().getId());
+        itemStoreDto.setIdShelve(itemStore.getShelve().getId());
 
         return itemStoreDto;
     }
@@ -81,7 +98,17 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 
         ItemStore itemStore = new ItemStore();
         itemStore = parseDtoToModel(itemStoreDto);
-        itemStoreRepository.save(itemStore);
+		
+		if (!exists(itemStore)) {
+
+			try {
+				itemStoreRepository.save(itemStore);
+			} catch (Exception e) {
+				System.out.println(e.getCause());
+			}
+		} else {
+			System.out.println("This item designation already exists");
+		}
     }
 
     @Override
@@ -91,14 +118,46 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     }
 
     @Override
-    public void update(long id, ItemStoreDto itemStoreDto) {
+    public ItemStore update(long id, ItemStoreDto itemStoreDto) {
 
         ItemStore itemStore = new ItemStore();
         Optional<ItemStore> itemStoreUpd = findById(id);
 
         if(itemStoreUpd.isPresent()) {
             itemStore = parseDtoToModel(itemStoreDto);
-            itemStoreRepository.save(itemStore);
+            
+            if(!existsWithExclusion(itemStore)) {
+				try {
+					itemStoreRepository.save(itemStore);
+				} catch (Exception e) {
+					System.out.println(e.getCause());
+				}
+			}
+			else {
+				System.out.println("This item designation already exists");
+			}
         }
-    }
+        
+        return itemStore;
+    } 
+    
+    
+    @Override
+	public boolean exists(ItemStore itemStore) {
+		
+		Optional<ItemStore> itemStoreOpt = itemStoreRepository.findByDesignation(itemStore.getDesignation());
+		
+		return itemStoreOpt.isPresent();
+	}
+    
+    @Override
+    public boolean existsWithExclusion(ItemStore itemStore) {
+
+		Optional<ItemStore> itemStoreOpt = itemStoreRepository.findByDesignation(itemStore.getDesignation());
+		
+		return itemStoreOpt.isPresent() && itemStoreOpt.get().getId() != itemStore.getId();
+		
+		
+		
+	}
 }
