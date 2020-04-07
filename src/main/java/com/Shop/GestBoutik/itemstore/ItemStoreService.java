@@ -16,6 +16,7 @@ public interface ItemStoreService {
     public void create(ItemStoreDto itemStoreDto);
     public void delete(long id);
     public ItemStore update(long id , ItemStoreDto itemStoreDto);
+    public void shelfQuantityRemove(ItemStoreDto itemStoreDto);
 	boolean exists(ItemStore itemStore);
 	boolean existsWithExclusion(ItemStore itemStore);
 }

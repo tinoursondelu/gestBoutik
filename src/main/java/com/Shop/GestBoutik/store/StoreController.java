@@ -3,6 +3,8 @@ package com.Shop.GestBoutik.store;
 import java.util.List;
 import java.util.Optional;
 
+import com.Shop.GestBoutik.itemstore.ItemStoreDto;
+import com.Shop.GestBoutik.itemstore.ItemStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,8 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	@Autowired
+	private ItemStoreService itemStoreService;
 	
 	
 //	TODO: add method for search store by name
@@ -66,6 +70,11 @@ public class StoreController {
 	public void createStore(@RequestBody StoreDto storeDto) {
 		
 		storeService.create(storeDto);
+	}
+
+	@PostMapping("/itemstoreBought")
+	public void itemStoreBought (@RequestBody ItemStoreDto itemStoreDto) {
+		itemStoreService.shelfQuantityRemove(itemStoreDto);
 	}
 	
 	/**

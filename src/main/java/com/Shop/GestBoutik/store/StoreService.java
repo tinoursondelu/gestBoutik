@@ -22,6 +22,8 @@ public interface StoreService {
 	public Collection<StoreDto> parseListModelToDto(Collection<Store> stores);
 
 	public Store parseDtoToModel(StoreDto storeDto);
+
+
 	
 	
 	

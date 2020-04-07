@@ -6,6 +6,7 @@ import com.Shop.GestBoutik.services.ColorServiceImpl;
 import com.Shop.GestBoutik.services.ItemServiceImpl;
 import com.Shop.GestBoutik.services.SizeServiceImpl;
 import com.Shop.GestBoutik.shelve.ShelveServiceImpl;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -145,9 +146,9 @@ public class ItemStoreServiceImpl implements ItemStoreService {
     
     @Override
 	public boolean exists(ItemStore itemStore) {
-		
+
 		Optional<ItemStore> itemStoreOpt = itemStoreRepository.findByDesignation(itemStore.getDesignation());
-		
+
 		return itemStoreOpt.isPresent();
 	}
     
@@ -161,4 +162,11 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		
 		
 	}
+
+    @Override
+    public void shelfQuantityRemove(ItemStoreDto itemStoreDto) {
+        itemStoreDto.setShelfQuantity(itemStoreDto.getShelfQuantity() - 1);
+        update(itemStoreDto.getId(),itemStoreDto);
+
+    }
 }
