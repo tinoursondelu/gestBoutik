@@ -1,13 +1,10 @@
 package com.Shop.GestBoutik.itemstore;
 
-import com.Shop.GestBoutik.models.Item;
 import com.Shop.GestBoutik.models.ItemStore;
-import com.Shop.GestBoutik.models.Shelve;
 import com.Shop.GestBoutik.services.BrandServiceImpl;
 import com.Shop.GestBoutik.services.ColorServiceImpl;
 import com.Shop.GestBoutik.services.ItemServiceImpl;
 import com.Shop.GestBoutik.services.SizeServiceImpl;
-import com.Shop.GestBoutik.shelve.ShelveService;
 import com.Shop.GestBoutik.shelve.ShelveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +51,8 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         itemStore.setSize(sizeService.findById(itemStoreDto.getIdSize()).get());
         itemStore.setBrand(brandService.findById(itemStoreDto.getIdBrand()).get());
         itemStore.setShelve(shelveService.findById(itemStoreDto.getIdShelve()).get());
+        itemStore.setStockQuantity(itemStoreDto.getStockQuantity());
+        itemStore.setShelfQuantity(itemStoreDto.getShelfQuantity());
         //TO DO: SET ITEM - DONE
         itemStore.setItem(itemService.findById(itemStoreDto.getIdItem()).get());
         itemStore.setDesignation(
@@ -89,6 +88,8 @@ public class ItemStoreServiceImpl implements ItemStoreService {
         itemStoreDto.setIdSize(itemStore.getSize().getId());
         itemStoreDto.setIdItem(itemStore.getItem().getId());
         itemStoreDto.setIdShelve(itemStore.getShelve().getId());
+        itemStoreDto.setShelfQuantity(itemStore.getShelfQuantity());
+        itemStoreDto.setStockQuantity(itemStore.getStockQuantity());
 
         return itemStoreDto;
     }

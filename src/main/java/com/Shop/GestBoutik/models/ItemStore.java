@@ -56,6 +56,10 @@ public class ItemStore extends Auditable implements Serializable {
 	
 	@ManyToOne
 	private Item item;
+
+	private Long shelfQuantity;
+
+	private Long stockQuantity;
 	
 	
 	

@@ -25,5 +25,9 @@ public class ItemStoreDto {
 
     private Long idShelve;
 
+    private Long stockQuantity ;
+
+    private Long shelfQuantity ;
+
 
 }
